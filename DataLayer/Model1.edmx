@@ -1,0 +1,1251 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="QLNSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BANGCHAMCONG">
+          <Key>
+            <PropertyRef Name="MaCC" />
+          </Key>
+          <Property Name="MaCC" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="NgayChamCong" Type="date" Nullable="false" />
+          <Property Name="GioVao" Type="time" Precision="0" />
+          <Property Name="GioRa" Type="time" Precision="0" />
+          <Property Name="MaNV" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="BANGLUONG">
+          <Key>
+            <PropertyRef Name="MaBL" />
+          </Key>
+          <Property Name="MaBL" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Thang" Type="int" />
+          <Property Name="Nam" Type="int" />
+          <Property Name="SoNgayLam" Type="int" />
+          <Property Name="SoNgayNghiCoPhep" Type="int" />
+          <Property Name="SoNgayNghiKhongPhep" Type="int" />
+          <Property Name="TongPhuCap" Type="decimal" Precision="12" Scale="0" />
+          <Property Name="TongTru" Type="decimal" Precision="12" Scale="0" />
+          <Property Name="TongLuong" Type="decimal" Precision="15" Scale="3" />
+          <Property Name="MaNV" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="CHUCVU">
+          <Key>
+            <PropertyRef Name="MaCV" />
+          </Key>
+          <Property Name="MaCV" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="TenCV" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DONXINNGHI">
+          <Key>
+            <PropertyRef Name="MaDon" />
+          </Key>
+          <Property Name="MaDon" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="TuNgay" Type="date" Nullable="false" />
+          <Property Name="DenNgay" Type="date" Nullable="false" />
+          <Property Name="TrangThai" Type="int" />
+          <Property Name="MaNV" Type="varchar" MaxLength="20" />
+          <Property Name="LyDo" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="HOPDONG">
+          <Key>
+            <PropertyRef Name="MaHD" />
+          </Key>
+          <Property Name="MaHD" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="NgayBD" Type="date" />
+          <Property Name="NgayKT" Type="date" />
+          <Property Name="NgayKy" Type="date" />
+          <Property Name="MucLuong" Type="decimal" Precision="12" Scale="0" />
+          <Property Name="TrangThai" Type="int" />
+          <Property Name="MaNV" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="NHANPHUCAP">
+          <Key>
+            <PropertyRef Name="MaNV" />
+            <PropertyRef Name="MaPC" />
+          </Key>
+          <Property Name="MaNV" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="MaPC" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="NoiDung" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="NHANVIEN">
+          <Key>
+            <PropertyRef Name="MaNV" />
+          </Key>
+          <Property Name="MaNV" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="HoTen" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="NgaySinh" Type="date" />
+          <Property Name="GioiTinh" Type="nvarchar" MaxLength="10" />
+          <Property Name="DiaChi" Type="nvarchar" MaxLength="255" />
+          <Property Name="Sdt" Type="varchar" MaxLength="15" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+          <Property Name="MaCV" Type="varchar" MaxLength="20" />
+          <Property Name="MaPB" Type="varchar" MaxLength="20" />
+          <Property Name="TrangThai" Type="int" />
+        </EntityType>
+        <EntityType Name="PHONGBAN">
+          <Key>
+            <PropertyRef Name="MaPB" />
+          </Key>
+          <Property Name="MaPB" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="TenPB" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="DiaDiem" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="PHUCAP">
+          <Key>
+            <PropertyRef Name="MaPC" />
+          </Key>
+          <Property Name="MaPC" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="TenPC" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="SoTien" Type="decimal" Precision="12" Scale="0" />
+        </EntityType>
+        <Association Name="FK_BL_NhanVien">
+          <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="BANGLUONG" Type="Self.BANGLUONG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHANVIEN">
+              <PropertyRef Name="MaNV" />
+            </Principal>
+            <Dependent Role="BANGLUONG">
+              <PropertyRef Name="MaNV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CC_NhanVien">
+          <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="BANGCHAMCONG" Type="Self.BANGCHAMCONG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHANVIEN">
+              <PropertyRef Name="MaNV" />
+            </Principal>
+            <Dependent Role="BANGCHAMCONG">
+              <PropertyRef Name="MaNV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DXN_NhanVien">
+          <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DONXINNGHI" Type="Self.DONXINNGHI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHANVIEN">
+              <PropertyRef Name="MaNV" />
+            </Principal>
+            <Dependent Role="DONXINNGHI">
+              <PropertyRef Name="MaNV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HD_NhanVien">
+          <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="HOPDONG" Type="Self.HOPDONG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHANVIEN">
+              <PropertyRef Name="MaNV" />
+            </Principal>
+            <Dependent Role="HOPDONG">
+              <PropertyRef Name="MaNV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NPC_NhanVien">
+          <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="NHANPHUCAP" Type="Self.NHANPHUCAP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHANVIEN">
+              <PropertyRef Name="MaNV" />
+            </Principal>
+            <Dependent Role="NHANPHUCAP">
+              <PropertyRef Name="MaNV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NPC_PhuCap">
+          <End Role="PHUCAP" Type="Self.PHUCAP" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="NHANPHUCAP" Type="Self.NHANPHUCAP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PHUCAP">
+              <PropertyRef Name="MaPC" />
+            </Principal>
+            <Dependent Role="NHANPHUCAP">
+              <PropertyRef Name="MaPC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NV_ChucVu">
+          <End Role="CHUCVU" Type="Self.CHUCVU" Multiplicity="0..1" />
+          <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CHUCVU">
+              <PropertyRef Name="MaCV" />
+            </Principal>
+            <Dependent Role="NHANVIEN">
+              <PropertyRef Name="MaCV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NV_PhongBan">
+          <End Role="PHONGBAN" Type="Self.PHONGBAN" Multiplicity="0..1" />
+          <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PHONGBAN">
+              <PropertyRef Name="MaPB" />
+            </Principal>
+            <Dependent Role="NHANVIEN">
+              <PropertyRef Name="MaPB" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_NgayPhepConLai" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+          <Parameter Name="MaNV" Type="varchar" Mode="In" />
+          <Parameter Name="Thang" Type="int" Mode="In" />
+          <Parameter Name="Nam" Type="int" Mode="In" />
+        </Function>
+        <Function Name="fn_TinhNgayNghiThang" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MaNV" Type="varchar" Mode="In" />
+          <Parameter Name="Thang" Type="int" Mode="In" />
+          <Parameter Name="Nam" Type="int" Mode="In" />
+          <Parameter Name="PhepConLai" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="SoNgayCoPhep" Type="int" />
+                <Property Name="SoNgayKhongPhep" Type="int" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="sp_CapNhatThongTinCaNhan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="HoTen" Type="nvarchar" Mode="In" />
+          <Parameter Name="NgaySinh" Type="date" Mode="In" />
+          <Parameter Name="GioiTinh" Type="nvarchar" Mode="In" />
+          <Parameter Name="DiaChi" Type="nvarchar" Mode="In" />
+          <Parameter Name="Sdt" Type="varchar" Mode="In" />
+          <Parameter Name="Email" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_CapNhatTrangThaiDon" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MaDon" Type="varchar" Mode="In" />
+          <Parameter Name="TrangThai" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_ChoNghiViec" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MaNV" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_ChotBangLuongThang" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Thang" Type="int" Mode="In" />
+          <Parameter Name="Nam" Type="int" Mode="In" />
+          <Parameter Name="CongChuan" Type="decimal" Mode="In" />
+        </Function>
+        <Function Name="sp_GetDanhSachHopDong" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TuKhoa" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_GetListChucVu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_GetListNhanPhuCap" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_GetListNhanVien" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="HienThiTatCa" Type="bit" Mode="In" />
+          <Parameter Name="TuKhoa" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_GetListPhongBan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_GetListPhuCap" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_HuyHopDong" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MaHD" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_LayBangLuongTheoThang" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Thang" Type="int" Mode="In" />
+          <Parameter Name="Nam" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_LayDanhSachDon" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TrangThai" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_SuaChucVu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MaCV" Type="varchar" Mode="In" />
+          <Parameter Name="TenCV" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_SuaHopDong" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MaHD" Type="varchar" Mode="In" />
+          <Parameter Name="NgayBD" Type="date" Mode="In" />
+          <Parameter Name="NgayKT" Type="date" Mode="In" />
+          <Parameter Name="NgayKy" Type="date" Mode="In" />
+          <Parameter Name="MucLuong" Type="decimal" Mode="In" />
+          <Parameter Name="MaNV" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_SuaNhanVien" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MaNV" Type="varchar" Mode="In" />
+          <Parameter Name="HoTen" Type="nvarchar" Mode="In" />
+          <Parameter Name="NgaySinh" Type="date" Mode="In" />
+          <Parameter Name="GioiTinh" Type="nvarchar" Mode="In" />
+          <Parameter Name="DiaChi" Type="nvarchar" Mode="In" />
+          <Parameter Name="Sdt" Type="varchar" Mode="In" />
+          <Parameter Name="Email" Type="varchar" Mode="In" />
+          <Parameter Name="TenCV" Type="nvarchar" Mode="In" />
+          <Parameter Name="TenPB" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_SuaPhongBan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MaPB" Type="varchar" Mode="In" />
+          <Parameter Name="TenPB" Type="nvarchar" Mode="In" />
+          <Parameter Name="DiaDiem" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_SuaPhuCap" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MaPC" Type="varchar" Mode="In" />
+          <Parameter Name="TenPC" Type="nvarchar" Mode="In" />
+          <Parameter Name="SoTien" Type="decimal" Mode="In" />
+        </Function>
+        <Function Name="sp_ThemChucVu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TenCV" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_ThemDonXinNghi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TuNgay" Type="date" Mode="In" />
+          <Parameter Name="DenNgay" Type="date" Mode="In" />
+          <Parameter Name="LyDo" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_ThemHopDong" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NgayBD" Type="date" Mode="In" />
+          <Parameter Name="NgayKT" Type="date" Mode="In" />
+          <Parameter Name="NgayKy" Type="date" Mode="In" />
+          <Parameter Name="MucLuong" Type="decimal" Mode="In" />
+          <Parameter Name="MaNV" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_ThemNhanPhuCap" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MaNV" Type="varchar" Mode="In" />
+          <Parameter Name="TenPC" Type="nvarchar" Mode="In" />
+          <Parameter Name="NoiDung" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_ThemNhanVien" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="HoTen" Type="nvarchar" Mode="In" />
+          <Parameter Name="NgaySinh" Type="date" Mode="In" />
+          <Parameter Name="GioiTinh" Type="nvarchar" Mode="In" />
+          <Parameter Name="DiaChi" Type="nvarchar" Mode="In" />
+          <Parameter Name="Sdt" Type="varchar" Mode="In" />
+          <Parameter Name="Email" Type="varchar" Mode="In" />
+          <Parameter Name="TenCV" Type="nvarchar" Mode="In" />
+          <Parameter Name="TenPB" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_ThemPhongBan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TenPB" Type="nvarchar" Mode="In" />
+          <Parameter Name="DiaDiem" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_ThemPhuCap" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TenPC" Type="nvarchar" Mode="In" />
+          <Parameter Name="SoTien" Type="decimal" Mode="In" />
+        </Function>
+        <Function Name="sp_ThongKeLuongTheoChucVu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Thang" Type="int" Mode="In" />
+          <Parameter Name="Nam" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_ThongKeLuongTheoPhongBan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Thang" Type="int" Mode="In" />
+          <Parameter Name="Nam" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_TuDongCapNhatTrangThaiHD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_XemDonXinNghiCaNhan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_XemLuongThangCaNhan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Thang" Type="int" Mode="In" />
+          <Parameter Name="Nam" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_XemThongTinCaNhan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_XoaChucVu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MaCV" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_XoaNhanPhuCap" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MaNV" Type="varchar" Mode="In" />
+          <Parameter Name="MaPC" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_XoaPhongBan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MaPB" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_XoaPhuCap" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MaPC" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="QLNSModelStoreContainer">
+          <EntitySet Name="BANGCHAMCONG" EntityType="Self.BANGCHAMCONG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BANGLUONG" EntityType="Self.BANGLUONG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CHUCVU" EntityType="Self.CHUCVU" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DONXINNGHI" EntityType="Self.DONXINNGHI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HOPDONG" EntityType="Self.HOPDONG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NHANPHUCAP" EntityType="Self.NHANPHUCAP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NHANVIEN" EntityType="Self.NHANVIEN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PHONGBAN" EntityType="Self.PHONGBAN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PHUCAP" EntityType="Self.PHUCAP" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BL_NhanVien" Association="Self.FK_BL_NhanVien">
+            <End Role="NHANVIEN" EntitySet="NHANVIEN" />
+            <End Role="BANGLUONG" EntitySet="BANGLUONG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CC_NhanVien" Association="Self.FK_CC_NhanVien">
+            <End Role="NHANVIEN" EntitySet="NHANVIEN" />
+            <End Role="BANGCHAMCONG" EntitySet="BANGCHAMCONG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DXN_NhanVien" Association="Self.FK_DXN_NhanVien">
+            <End Role="NHANVIEN" EntitySet="NHANVIEN" />
+            <End Role="DONXINNGHI" EntitySet="DONXINNGHI" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HD_NhanVien" Association="Self.FK_HD_NhanVien">
+            <End Role="NHANVIEN" EntitySet="NHANVIEN" />
+            <End Role="HOPDONG" EntitySet="HOPDONG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NPC_NhanVien" Association="Self.FK_NPC_NhanVien">
+            <End Role="NHANVIEN" EntitySet="NHANVIEN" />
+            <End Role="NHANPHUCAP" EntitySet="NHANPHUCAP" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NPC_PhuCap" Association="Self.FK_NPC_PhuCap">
+            <End Role="PHUCAP" EntitySet="PHUCAP" />
+            <End Role="NHANPHUCAP" EntitySet="NHANPHUCAP" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NV_ChucVu" Association="Self.FK_NV_ChucVu">
+            <End Role="CHUCVU" EntitySet="CHUCVU" />
+            <End Role="NHANVIEN" EntitySet="NHANVIEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NV_PhongBan" Association="Self.FK_NV_PhongBan">
+            <End Role="PHONGBAN" EntitySet="PHONGBAN" />
+            <End Role="NHANVIEN" EntitySet="NHANVIEN" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QLNSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BANGCHAMCONG">
+          <Key>
+            <PropertyRef Name="MaCC" />
+          </Key>
+          <Property Name="MaCC" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NgayChamCong" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="GioVao" Type="Time" Precision="0" />
+          <Property Name="GioRa" Type="Time" Precision="0" />
+          <Property Name="MaNV" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="NHANVIEN" Relationship="Self.FK_CC_NhanVien" FromRole="BANGCHAMCONG" ToRole="NHANVIEN" />
+        </EntityType>
+        <EntityType Name="BANGLUONG">
+          <Key>
+            <PropertyRef Name="MaBL" />
+          </Key>
+          <Property Name="MaBL" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Thang" Type="Int32" />
+          <Property Name="Nam" Type="Int32" />
+          <Property Name="SoNgayLam" Type="Int32" />
+          <Property Name="SoNgayNghiCoPhep" Type="Int32" />
+          <Property Name="SoNgayNghiKhongPhep" Type="Int32" />
+          <Property Name="TongPhuCap" Type="Decimal" Precision="12" Scale="0" />
+          <Property Name="TongTru" Type="Decimal" Precision="12" Scale="0" />
+          <Property Name="TongLuong" Type="Decimal" Precision="15" Scale="3" />
+          <Property Name="MaNV" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="NHANVIEN" Relationship="Self.FK_BL_NhanVien" FromRole="BANGLUONG" ToRole="NHANVIEN" />
+        </EntityType>
+        <EntityType Name="CHUCVU">
+          <Key>
+            <PropertyRef Name="MaCV" />
+          </Key>
+          <Property Name="MaCV" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TenCV" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="NHANVIENs" Relationship="Self.FK_NV_ChucVu" FromRole="CHUCVU" ToRole="NHANVIEN" />
+        </EntityType>
+        <EntityType Name="DONXINNGHI">
+          <Key>
+            <PropertyRef Name="MaDon" />
+          </Key>
+          <Property Name="MaDon" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TuNgay" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DenNgay" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="TrangThai" Type="Int32" />
+          <Property Name="MaNV" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="NHANVIEN" Relationship="Self.FK_DXN_NhanVien" FromRole="DONXINNGHI" ToRole="NHANVIEN" />
+          <Property Name="LyDo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="HOPDONG">
+          <Key>
+            <PropertyRef Name="MaHD" />
+          </Key>
+          <Property Name="MaHD" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NgayBD" Type="DateTime" Precision="0" />
+          <Property Name="NgayKT" Type="DateTime" Precision="0" />
+          <Property Name="NgayKy" Type="DateTime" Precision="0" />
+          <Property Name="MucLuong" Type="Decimal" Precision="12" Scale="0" />
+          <Property Name="TrangThai" Type="Int32" />
+          <Property Name="MaNV" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="NHANVIEN" Relationship="Self.FK_HD_NhanVien" FromRole="HOPDONG" ToRole="NHANVIEN" />
+        </EntityType>
+        <EntityType Name="NHANPHUCAP">
+          <Key>
+            <PropertyRef Name="MaNV" />
+            <PropertyRef Name="MaPC" />
+          </Key>
+          <Property Name="MaNV" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MaPC" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NoiDung" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="NHANVIEN" Relationship="Self.FK_NPC_NhanVien" FromRole="NHANPHUCAP" ToRole="NHANVIEN" />
+          <NavigationProperty Name="PHUCAP" Relationship="Self.FK_NPC_PhuCap" FromRole="NHANPHUCAP" ToRole="PHUCAP" />
+        </EntityType>
+        <EntityType Name="NHANVIEN">
+          <Key>
+            <PropertyRef Name="MaNV" />
+          </Key>
+          <Property Name="MaNV" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="HoTen" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NgaySinh" Type="DateTime" Precision="0" />
+          <Property Name="GioiTinh" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="DiaChi" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Sdt" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MaCV" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MaPB" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BANGCHAMCONGs" Relationship="Self.FK_CC_NhanVien" FromRole="NHANVIEN" ToRole="BANGCHAMCONG" />
+          <NavigationProperty Name="BANGLUONGs" Relationship="Self.FK_BL_NhanVien" FromRole="NHANVIEN" ToRole="BANGLUONG" />
+          <NavigationProperty Name="CHUCVU" Relationship="Self.FK_NV_ChucVu" FromRole="NHANVIEN" ToRole="CHUCVU" />
+          <NavigationProperty Name="DONXINNGHIs" Relationship="Self.FK_DXN_NhanVien" FromRole="NHANVIEN" ToRole="DONXINNGHI" />
+          <NavigationProperty Name="HOPDONGs" Relationship="Self.FK_HD_NhanVien" FromRole="NHANVIEN" ToRole="HOPDONG" />
+          <NavigationProperty Name="NHANPHUCAPs" Relationship="Self.FK_NPC_NhanVien" FromRole="NHANVIEN" ToRole="NHANPHUCAP" />
+          <NavigationProperty Name="PHONGBAN" Relationship="Self.FK_NV_PhongBan" FromRole="NHANVIEN" ToRole="PHONGBAN" />
+          <Property Name="TrangThai" Type="Int32" />
+        </EntityType>
+        <EntityType Name="PHONGBAN">
+          <Key>
+            <PropertyRef Name="MaPB" />
+          </Key>
+          <Property Name="MaPB" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TenPB" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DiaDiem" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="NHANVIENs" Relationship="Self.FK_NV_PhongBan" FromRole="PHONGBAN" ToRole="NHANVIEN" />
+        </EntityType>
+        <EntityType Name="PHUCAP">
+          <Key>
+            <PropertyRef Name="MaPC" />
+          </Key>
+          <Property Name="MaPC" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TenPC" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SoTien" Type="Decimal" Precision="12" Scale="0" />
+          <NavigationProperty Name="NHANPHUCAPs" Relationship="Self.FK_NPC_PhuCap" FromRole="PHUCAP" ToRole="NHANPHUCAP" />
+        </EntityType>
+        <Association Name="FK_CC_NhanVien">
+          <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="BANGCHAMCONG" Type="Self.BANGCHAMCONG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHANVIEN">
+              <PropertyRef Name="MaNV" />
+            </Principal>
+            <Dependent Role="BANGCHAMCONG">
+              <PropertyRef Name="MaNV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BL_NhanVien">
+          <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="BANGLUONG" Type="Self.BANGLUONG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHANVIEN">
+              <PropertyRef Name="MaNV" />
+            </Principal>
+            <Dependent Role="BANGLUONG">
+              <PropertyRef Name="MaNV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NV_ChucVu">
+          <End Role="CHUCVU" Type="Self.CHUCVU" Multiplicity="0..1" />
+          <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CHUCVU">
+              <PropertyRef Name="MaCV" />
+            </Principal>
+            <Dependent Role="NHANVIEN">
+              <PropertyRef Name="MaCV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DXN_NhanVien">
+          <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DONXINNGHI" Type="Self.DONXINNGHI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHANVIEN">
+              <PropertyRef Name="MaNV" />
+            </Principal>
+            <Dependent Role="DONXINNGHI">
+              <PropertyRef Name="MaNV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HD_NhanVien">
+          <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="HOPDONG" Type="Self.HOPDONG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHANVIEN">
+              <PropertyRef Name="MaNV" />
+            </Principal>
+            <Dependent Role="HOPDONG">
+              <PropertyRef Name="MaNV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NPC_NhanVien">
+          <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="NHANPHUCAP" Type="Self.NHANPHUCAP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHANVIEN">
+              <PropertyRef Name="MaNV" />
+            </Principal>
+            <Dependent Role="NHANPHUCAP">
+              <PropertyRef Name="MaNV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NPC_PhuCap">
+          <End Role="PHUCAP" Type="Self.PHUCAP" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="NHANPHUCAP" Type="Self.NHANPHUCAP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PHUCAP">
+              <PropertyRef Name="MaPC" />
+            </Principal>
+            <Dependent Role="NHANPHUCAP">
+              <PropertyRef Name="MaPC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NV_PhongBan">
+          <End Role="PHONGBAN" Type="Self.PHONGBAN" Multiplicity="0..1" />
+          <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PHONGBAN">
+              <PropertyRef Name="MaPB" />
+            </Principal>
+            <Dependent Role="NHANVIEN">
+              <PropertyRef Name="MaPB" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QLNSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BANGCHAMCONGs" EntityType="Self.BANGCHAMCONG" />
+          <EntitySet Name="BANGLUONGs" EntityType="Self.BANGLUONG" />
+          <EntitySet Name="CHUCVUs" EntityType="Self.CHUCVU" />
+          <EntitySet Name="DONXINNGHIs" EntityType="Self.DONXINNGHI" />
+          <EntitySet Name="HOPDONGs" EntityType="Self.HOPDONG" />
+          <EntitySet Name="NHANPHUCAPs" EntityType="Self.NHANPHUCAP" />
+          <EntitySet Name="NHANVIENs" EntityType="Self.NHANVIEN" />
+          <EntitySet Name="PHONGBANs" EntityType="Self.PHONGBAN" />
+          <EntitySet Name="PHUCAPs" EntityType="Self.PHUCAP" />
+          <AssociationSet Name="FK_CC_NhanVien" Association="Self.FK_CC_NhanVien">
+            <End Role="NHANVIEN" EntitySet="NHANVIENs" />
+            <End Role="BANGCHAMCONG" EntitySet="BANGCHAMCONGs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BL_NhanVien" Association="Self.FK_BL_NhanVien">
+            <End Role="NHANVIEN" EntitySet="NHANVIENs" />
+            <End Role="BANGLUONG" EntitySet="BANGLUONGs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NV_ChucVu" Association="Self.FK_NV_ChucVu">
+            <End Role="CHUCVU" EntitySet="CHUCVUs" />
+            <End Role="NHANVIEN" EntitySet="NHANVIENs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DXN_NhanVien" Association="Self.FK_DXN_NhanVien">
+            <End Role="NHANVIEN" EntitySet="NHANVIENs" />
+            <End Role="DONXINNGHI" EntitySet="DONXINNGHIs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HD_NhanVien" Association="Self.FK_HD_NhanVien">
+            <End Role="NHANVIEN" EntitySet="NHANVIENs" />
+            <End Role="HOPDONG" EntitySet="HOPDONGs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NPC_NhanVien" Association="Self.FK_NPC_NhanVien">
+            <End Role="NHANVIEN" EntitySet="NHANVIENs" />
+            <End Role="NHANPHUCAP" EntitySet="NHANPHUCAPs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NPC_PhuCap" Association="Self.FK_NPC_PhuCap">
+            <End Role="PHUCAP" EntitySet="PHUCAPs" />
+            <End Role="NHANPHUCAP" EntitySet="NHANPHUCAPs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NV_PhongBan" Association="Self.FK_NV_PhongBan">
+            <End Role="PHONGBAN" EntitySet="PHONGBANs" />
+            <End Role="NHANVIEN" EntitySet="NHANVIENs" />
+          </AssociationSet>
+          <FunctionImport Name="sp_ThemPhongBan">
+            <Parameter Name="TenPB" Mode="In" Type="String" />
+            <Parameter Name="DiaDiem" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_SuaPhongBan">
+            <Parameter Name="MaPB" Mode="In" Type="String" />
+            <Parameter Name="TenPB" Mode="In" Type="String" />
+            <Parameter Name="DiaDiem" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_XoaPhongBan">
+          <Parameter Name="MaPB" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_ThemPhuCap">
+            <Parameter Name="TenPC" Mode="In" Type="String" />
+            <Parameter Name="SoTien" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="sp_SuaPhuCap">
+            <Parameter Name="MaPC" Mode="In" Type="String" />
+            <Parameter Name="TenPC" Mode="In" Type="String" />
+            <Parameter Name="SoTien" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="sp_XoaPhuCap">
+          <Parameter Name="MaPC" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_ThemNhanVien">
+            <Parameter Name="HoTen" Mode="In" Type="String" />
+            <Parameter Name="NgaySinh" Mode="In" Type="DateTime" />
+            <Parameter Name="GioiTinh" Mode="In" Type="String" />
+            <Parameter Name="DiaChi" Mode="In" Type="String" />
+            <Parameter Name="Sdt" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="TenCV" Mode="In" Type="String" />
+            <Parameter Name="TenPB" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_SuaNhanVien">
+            <Parameter Name="MaNV" Mode="In" Type="String" />
+            <Parameter Name="HoTen" Mode="In" Type="String" />
+            <Parameter Name="NgaySinh" Mode="In" Type="DateTime" />
+            <Parameter Name="GioiTinh" Mode="In" Type="String" />
+            <Parameter Name="DiaChi" Mode="In" Type="String" />
+            <Parameter Name="Sdt" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="TenCV" Mode="In" Type="String" />
+            <Parameter Name="TenPB" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_ChoNghiViec">
+          <Parameter Name="MaNV" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_ThemHopDong">
+            <Parameter Name="NgayBD" Mode="In" Type="DateTime" />
+            <Parameter Name="NgayKT" Mode="In" Type="DateTime" />
+            <Parameter Name="NgayKy" Mode="In" Type="DateTime" />
+            <Parameter Name="MucLuong" Mode="In" Type="Decimal" />
+            <Parameter Name="MaNV" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_SuaHopDong">
+            <Parameter Name="MaHD" Mode="In" Type="String" />
+            <Parameter Name="NgayBD" Mode="In" Type="DateTime" />
+            <Parameter Name="NgayKT" Mode="In" Type="DateTime" />
+            <Parameter Name="NgayKy" Mode="In" Type="DateTime" />
+            <Parameter Name="MucLuong" Mode="In" Type="Decimal" />
+            <Parameter Name="MaNV" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_HuyHopDong">
+          <Parameter Name="MaHD" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_TuDongCapNhatTrangThaiHD" />
+          <FunctionImport Name="sp_CapNhatTrangThaiDon">
+            <Parameter Name="MaDon" Mode="In" Type="String" />
+            <Parameter Name="TrangThai" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="fn_TinhNgayNghiThang" IsComposable="true" ReturnType="Collection(QLNSModel.fn_TinhNgayNghiThang_Result)">
+            <Parameter Name="MaNV" Mode="In" Type="String" />
+            <Parameter Name="Thang" Mode="In" Type="Int32" />
+            <Parameter Name="Nam" Mode="In" Type="Int32" />
+            <Parameter Name="PhepConLai" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_ChotBangLuongThang">
+            <Parameter Name="Thang" Mode="In" Type="Int32" />
+            <Parameter Name="Nam" Mode="In" Type="Int32" />
+            <Parameter Name="CongChuan" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="sp_ThemNhanPhuCap">
+            <Parameter Name="MaNV" Mode="In" Type="String" />
+            <Parameter Name="TenPC" Mode="In" Type="String" />
+            <Parameter Name="NoiDung" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_XoaNhanPhuCap">
+            <Parameter Name="MaNV" Mode="In" Type="String" />
+            <Parameter Name="MaPC" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_CapNhatThongTinCaNhan">
+            <Parameter Name="HoTen" Mode="In" Type="String" />
+            <Parameter Name="NgaySinh" Mode="In" Type="DateTime" />
+            <Parameter Name="GioiTinh" Mode="In" Type="String" />
+            <Parameter Name="DiaChi" Mode="In" Type="String" />
+            <Parameter Name="Sdt" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_ThemDonXinNghi">
+            <Parameter Name="TuNgay" Mode="In" Type="DateTime" />
+            <Parameter Name="DenNgay" Mode="In" Type="DateTime" />
+            <Parameter Name="LyDo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_XemThongTinCaNhan" ReturnType="Collection(QLNSModel.sp_XemThongTinCaNhan_Result)" />
+          <FunctionImport Name="sp_XemLuongThangCaNhan" ReturnType="Collection(QLNSModel.sp_XemLuongThangCaNhan_Result)">
+            <Parameter Name="Thang" Mode="In" Type="Int32" />
+            <Parameter Name="Nam" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_XemDonXinNghiCaNhan" ReturnType="Collection(QLNSModel.sp_XemDonXinNghiCaNhan_Result)" />
+          <FunctionImport Name="sp_ThongKeLuongTheoChucVu" ReturnType="Collection(QLNSModel.sp_ThongKeLuongTheoChucVu_Result)">
+            <Parameter Name="Thang" Mode="In" Type="Int32" />
+            <Parameter Name="Nam" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_ThongKeLuongTheoPhongBan" ReturnType="Collection(QLNSModel.sp_ThongKeLuongTheoPhongBan_Result)">
+            <Parameter Name="Thang" Mode="In" Type="Int32" />
+            <Parameter Name="Nam" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_LayBangLuongTheoThang" ReturnType="Collection(QLNSModel.sp_LayBangLuongTheoThang_Result)">
+            <Parameter Name="Thang" Mode="In" Type="Int32" />
+            <Parameter Name="Nam" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetListNhanVien" ReturnType="Collection(QLNSModel.sp_GetListNhanVien_Result)">
+            <Parameter Name="HienThiTatCa" Mode="In" Type="Boolean" />
+            <Parameter Name="TuKhoa" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_LayDanhSachDon" ReturnType="Collection(QLNSModel.sp_LayDanhSachDon_Result)">
+          <Parameter Name="TrangThai" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetDanhSachHopDong" ReturnType="Collection(QLNSModel.sp_GetDanhSachHopDong_Result)">
+          <Parameter Name="TuKhoa" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetListNhanPhuCap" ReturnType="Collection(QLNSModel.sp_GetListNhanPhuCap_Result)" />
+          <FunctionImport Name="sp_GetListPhuCap" ReturnType="Collection(QLNSModel.sp_GetListPhuCap_Result)" />
+          <FunctionImport Name="sp_GetListPhongBan" ReturnType="Collection(QLNSModel.sp_GetListPhongBan_Result)" />
+          <FunctionImport Name="sp_GetListChucVu" ReturnType="Collection(QLNSModel.sp_GetListChucVu_Result)" />
+          <FunctionImport Name="sp_ThemChucVu">
+          <Parameter Name="TenCV" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_SuaChucVu">
+            <Parameter Name="MaCV" Mode="In" Type="String" />
+            <Parameter Name="TenCV" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_XoaChucVu">
+          <Parameter Name="MaCV" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="fn_TinhNgayNghiThang_Result">
+          <Property Type="Int32" Name="SoNgayCoPhep" Nullable="true" />
+          <Property Type="Int32" Name="SoNgayKhongPhep" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_XemThongTinCaNhan_Result">
+          <Property Type="String" Name="HoTen" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="NgaySinh" Nullable="true" />
+          <Property Type="String" Name="GioiTinh" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="DiaChi" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Sdt" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="TenCV" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="TenPB" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="sp_XemLuongThangCaNhan_Result">
+          <Property Type="Int32" Name="SoNgayLam" Nullable="true" />
+          <Property Type="Int32" Name="SoNgayNghiCoPhep" Nullable="true" />
+          <Property Type="Int32" Name="SoNgayNghiKhongPhep" Nullable="true" />
+          <Property Type="Decimal" Name="TongPhuCap" Nullable="true" Precision="12" Scale="0" />
+          <Property Type="Decimal" Name="TongTru" Nullable="true" Precision="12" Scale="0" />
+          <Property Type="Decimal" Name="TongLuong" Nullable="true" Precision="15" Scale="3" />
+        </ComplexType>
+        <ComplexType Name="sp_XemDonXinNghiCaNhan_Result">
+          <Property Type="String" Name="MaDon" Nullable="false" MaxLength="20" />
+          <Property Type="DateTime" Name="TuNgay" Nullable="false" />
+          <Property Type="DateTime" Name="DenNgay" Nullable="false" />
+          <Property Type="String" Name="LyDo" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="TrangThai" Nullable="true" MaxLength="9" />
+        </ComplexType>
+        <ComplexType Name="sp_ThongKeLuongTheoChucVu_Result">
+          <Property Type="String" Name="TenGoi" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="SoNhanVien" Nullable="true" />
+          <Property Type="Decimal" Name="TongLuong" Nullable="true" Precision="38" Scale="3" />
+          <Property Type="Decimal" Name="LuongTrungBinh" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="Decimal" Name="TyLe" Nullable="true" Precision="10" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="sp_ThongKeLuongTheoPhongBan_Result">
+          <Property Type="String" Name="TenGoi" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="SoNhanVien" Nullable="true" />
+          <Property Type="Decimal" Name="TongLuong" Nullable="true" Precision="38" Scale="3" />
+          <Property Type="Decimal" Name="LuongTrungBinh" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="Decimal" Name="TyLe" Nullable="true" Precision="10" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="sp_LayBangLuongTheoThang_Result">
+          <Property Type="String" Name="MaBL" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="MaNV" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="HoTen" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="SoNgayLam" Nullable="true" />
+          <Property Type="Int32" Name="CoPhep" Nullable="true" />
+          <Property Type="Int32" Name="KhongPhep" Nullable="true" />
+          <Property Type="Decimal" Name="TongPhuCap" Nullable="true" Precision="12" Scale="0" />
+          <Property Type="Decimal" Name="TongTru" Nullable="true" Precision="12" Scale="0" />
+          <Property Type="Decimal" Name="TongLuong" Nullable="true" Precision="15" Scale="3" />
+        </ComplexType>
+        <ComplexType Name="sp_GetListNhanVien_Result">
+          <Property Type="String" Name="MaNV" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="HoTen" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="NgaySinh" Nullable="true" />
+          <Property Type="String" Name="GioiTinh" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="DiaChi" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Sdt" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="TenCV" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="TenPB" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="TrangThai" Nullable="false" MaxLength="8" />
+        </ComplexType>
+        <ComplexType Name="sp_LayDanhSachDon_Result">
+          <Property Type="String" Name="MaDon" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="MaNV" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="HoTen" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="TuNgay" Nullable="false" />
+          <Property Type="DateTime" Name="DenNgay" Nullable="false" />
+          <Property Type="String" Name="LyDo" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="TrangThaiHienThi" Nullable="false" MaxLength="9" />
+        </ComplexType>
+        <ComplexType Name="sp_GetDanhSachHopDong_Result">
+          <Property Type="String" Name="MaHD" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="MaNV" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="HoTen" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="NgaySinh" Nullable="true" />
+          <Property Type="String" Name="GioiTinh" Nullable="true" MaxLength="10" />
+          <Property Type="DateTime" Name="NgayBD" Nullable="true" />
+          <Property Type="DateTime" Name="NgayKT" Nullable="true" />
+          <Property Type="DateTime" Name="NgayKy" Nullable="true" />
+          <Property Type="Decimal" Name="MucLuong" Nullable="true" Precision="12" Scale="0" />
+          <Property Type="String" Name="TrangThai" Nullable="false" MaxLength="12" />
+        </ComplexType>
+        <ComplexType Name="sp_GetListNhanPhuCap_Result">
+          <Property Type="String" Name="MaNV" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="HoTen" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="MaPC" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="TenPC" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="NoiDung" Nullable="true" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="sp_GetListPhuCap_Result">
+          <Property Type="String" Name="MaPC" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="TenPC" Nullable="false" MaxLength="100" />
+          <Property Type="Decimal" Name="SoTien" Nullable="true" Precision="12" Scale="0" />
+        </ComplexType>
+        <ComplexType Name="sp_GetListPhongBan_Result">
+          <Property Type="String" Name="MaPB" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="TenPB" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="DiaDiem" Nullable="true" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="sp_GetListChucVu_Result">
+          <Property Type="String" Name="MaCV" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="TenCV" Nullable="false" MaxLength="100" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QLNSModelStoreContainer" CdmEntityContainer="QLNSEntities">
+          <EntitySetMapping Name="BANGCHAMCONGs">
+            <EntityTypeMapping TypeName="QLNSModel.BANGCHAMCONG">
+              <MappingFragment StoreEntitySet="BANGCHAMCONG">
+                <ScalarProperty Name="MaCC" ColumnName="MaCC" />
+                <ScalarProperty Name="NgayChamCong" ColumnName="NgayChamCong" />
+                <ScalarProperty Name="GioVao" ColumnName="GioVao" />
+                <ScalarProperty Name="GioRa" ColumnName="GioRa" />
+                <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BANGLUONGs">
+            <EntityTypeMapping TypeName="QLNSModel.BANGLUONG">
+              <MappingFragment StoreEntitySet="BANGLUONG">
+                <ScalarProperty Name="MaBL" ColumnName="MaBL" />
+                <ScalarProperty Name="Thang" ColumnName="Thang" />
+                <ScalarProperty Name="Nam" ColumnName="Nam" />
+                <ScalarProperty Name="SoNgayLam" ColumnName="SoNgayLam" />
+                <ScalarProperty Name="SoNgayNghiCoPhep" ColumnName="SoNgayNghiCoPhep" />
+                <ScalarProperty Name="SoNgayNghiKhongPhep" ColumnName="SoNgayNghiKhongPhep" />
+                <ScalarProperty Name="TongPhuCap" ColumnName="TongPhuCap" />
+                <ScalarProperty Name="TongTru" ColumnName="TongTru" />
+                <ScalarProperty Name="TongLuong" ColumnName="TongLuong" />
+                <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CHUCVUs">
+            <EntityTypeMapping TypeName="QLNSModel.CHUCVU">
+              <MappingFragment StoreEntitySet="CHUCVU">
+                <ScalarProperty Name="MaCV" ColumnName="MaCV" />
+                <ScalarProperty Name="TenCV" ColumnName="TenCV" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DONXINNGHIs">
+            <EntityTypeMapping TypeName="QLNSModel.DONXINNGHI">
+              <MappingFragment StoreEntitySet="DONXINNGHI">
+                <ScalarProperty Name="LyDo" ColumnName="LyDo" />
+                <ScalarProperty Name="MaDon" ColumnName="MaDon" />
+                <ScalarProperty Name="TuNgay" ColumnName="TuNgay" />
+                <ScalarProperty Name="DenNgay" ColumnName="DenNgay" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HOPDONGs">
+            <EntityTypeMapping TypeName="QLNSModel.HOPDONG">
+              <MappingFragment StoreEntitySet="HOPDONG">
+                <ScalarProperty Name="MaHD" ColumnName="MaHD" />
+                <ScalarProperty Name="NgayBD" ColumnName="NgayBD" />
+                <ScalarProperty Name="NgayKT" ColumnName="NgayKT" />
+                <ScalarProperty Name="NgayKy" ColumnName="NgayKy" />
+                <ScalarProperty Name="MucLuong" ColumnName="MucLuong" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NHANPHUCAPs">
+            <EntityTypeMapping TypeName="QLNSModel.NHANPHUCAP">
+              <MappingFragment StoreEntitySet="NHANPHUCAP">
+                <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+                <ScalarProperty Name="MaPC" ColumnName="MaPC" />
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NHANVIENs">
+            <EntityTypeMapping TypeName="QLNSModel.NHANVIEN">
+              <MappingFragment StoreEntitySet="NHANVIEN">
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="Sdt" ColumnName="Sdt" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="MaCV" ColumnName="MaCV" />
+                <ScalarProperty Name="MaPB" ColumnName="MaPB" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PHONGBANs">
+            <EntityTypeMapping TypeName="QLNSModel.PHONGBAN">
+              <MappingFragment StoreEntitySet="PHONGBAN">
+                <ScalarProperty Name="MaPB" ColumnName="MaPB" />
+                <ScalarProperty Name="TenPB" ColumnName="TenPB" />
+                <ScalarProperty Name="DiaDiem" ColumnName="DiaDiem" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PHUCAPs">
+            <EntityTypeMapping TypeName="QLNSModel.PHUCAP">
+              <MappingFragment StoreEntitySet="PHUCAP">
+                <ScalarProperty Name="MaPC" ColumnName="MaPC" />
+                <ScalarProperty Name="TenPC" ColumnName="TenPC" />
+                <ScalarProperty Name="SoTien" ColumnName="SoTien" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_ThemPhongBan" FunctionName="QLNSModel.Store.sp_ThemPhongBan" />
+          <FunctionImportMapping FunctionImportName="sp_SuaPhongBan" FunctionName="QLNSModel.Store.sp_SuaPhongBan" />
+          <FunctionImportMapping FunctionImportName="sp_XoaPhongBan" FunctionName="QLNSModel.Store.sp_XoaPhongBan" />
+          <FunctionImportMapping FunctionImportName="sp_ThemPhuCap" FunctionName="QLNSModel.Store.sp_ThemPhuCap" />
+          <FunctionImportMapping FunctionImportName="sp_SuaPhuCap" FunctionName="QLNSModel.Store.sp_SuaPhuCap" />
+          <FunctionImportMapping FunctionImportName="sp_XoaPhuCap" FunctionName="QLNSModel.Store.sp_XoaPhuCap" />
+          <FunctionImportMapping FunctionImportName="sp_ThemNhanVien" FunctionName="QLNSModel.Store.sp_ThemNhanVien" />
+          <FunctionImportMapping FunctionImportName="sp_SuaNhanVien" FunctionName="QLNSModel.Store.sp_SuaNhanVien" />
+          <FunctionImportMapping FunctionImportName="sp_ChoNghiViec" FunctionName="QLNSModel.Store.sp_ChoNghiViec" />
+          <FunctionImportMapping FunctionImportName="sp_ThemHopDong" FunctionName="QLNSModel.Store.sp_ThemHopDong" />
+          <FunctionImportMapping FunctionImportName="sp_SuaHopDong" FunctionName="QLNSModel.Store.sp_SuaHopDong" />
+          <FunctionImportMapping FunctionImportName="sp_HuyHopDong" FunctionName="QLNSModel.Store.sp_HuyHopDong" />
+          <FunctionImportMapping FunctionImportName="sp_TuDongCapNhatTrangThaiHD" FunctionName="QLNSModel.Store.sp_TuDongCapNhatTrangThaiHD" />
+          <FunctionImportMapping FunctionImportName="sp_CapNhatTrangThaiDon" FunctionName="QLNSModel.Store.sp_CapNhatTrangThaiDon" />
+          <FunctionImportMapping FunctionImportName="fn_TinhNgayNghiThang" FunctionName="QLNSModel.Store.fn_TinhNgayNghiThang">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QLNSModel.fn_TinhNgayNghiThang_Result">
+                <ScalarProperty Name="SoNgayCoPhep" ColumnName="SoNgayCoPhep" />
+                <ScalarProperty Name="SoNgayKhongPhep" ColumnName="SoNgayKhongPhep" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_ChotBangLuongThang" FunctionName="QLNSModel.Store.sp_ChotBangLuongThang" />
+          <FunctionImportMapping FunctionImportName="sp_ThemNhanPhuCap" FunctionName="QLNSModel.Store.sp_ThemNhanPhuCap" />
+          <FunctionImportMapping FunctionImportName="sp_XoaNhanPhuCap" FunctionName="QLNSModel.Store.sp_XoaNhanPhuCap" />
+          <FunctionImportMapping FunctionImportName="sp_CapNhatThongTinCaNhan" FunctionName="QLNSModel.Store.sp_CapNhatThongTinCaNhan" />
+          <FunctionImportMapping FunctionImportName="sp_ThemDonXinNghi" FunctionName="QLNSModel.Store.sp_ThemDonXinNghi" />
+          <FunctionImportMapping FunctionImportName="sp_XemThongTinCaNhan" FunctionName="QLNSModel.Store.sp_XemThongTinCaNhan">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QLNSModel.sp_XemThongTinCaNhan_Result">
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="Sdt" ColumnName="Sdt" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="TenCV" ColumnName="TenCV" />
+                <ScalarProperty Name="TenPB" ColumnName="TenPB" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_XemLuongThangCaNhan" FunctionName="QLNSModel.Store.sp_XemLuongThangCaNhan">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QLNSModel.sp_XemLuongThangCaNhan_Result">
+                <ScalarProperty Name="SoNgayLam" ColumnName="SoNgayLam" />
+                <ScalarProperty Name="SoNgayNghiCoPhep" ColumnName="SoNgayNghiCoPhep" />
+                <ScalarProperty Name="SoNgayNghiKhongPhep" ColumnName="SoNgayNghiKhongPhep" />
+                <ScalarProperty Name="TongPhuCap" ColumnName="TongPhuCap" />
+                <ScalarProperty Name="TongTru" ColumnName="TongTru" />
+                <ScalarProperty Name="TongLuong" ColumnName="TongLuong" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_XemDonXinNghiCaNhan" FunctionName="QLNSModel.Store.sp_XemDonXinNghiCaNhan">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QLNSModel.sp_XemDonXinNghiCaNhan_Result">
+                <ScalarProperty Name="MaDon" ColumnName="MaDon" />
+                <ScalarProperty Name="TuNgay" ColumnName="TuNgay" />
+                <ScalarProperty Name="DenNgay" ColumnName="DenNgay" />
+                <ScalarProperty Name="LyDo" ColumnName="LyDo" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_ThongKeLuongTheoChucVu" FunctionName="QLNSModel.Store.sp_ThongKeLuongTheoChucVu">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QLNSModel.sp_ThongKeLuongTheoChucVu_Result">
+                <ScalarProperty Name="TenGoi" ColumnName="TenGoi" />
+                <ScalarProperty Name="SoNhanVien" ColumnName="SoNhanVien" />
+                <ScalarProperty Name="TongLuong" ColumnName="TongLuong" />
+                <ScalarProperty Name="LuongTrungBinh" ColumnName="LuongTrungBinh" />
+                <ScalarProperty Name="TyLe" ColumnName="TyLe" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_ThongKeLuongTheoPhongBan" FunctionName="QLNSModel.Store.sp_ThongKeLuongTheoPhongBan">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QLNSModel.sp_ThongKeLuongTheoPhongBan_Result">
+                <ScalarProperty Name="TenGoi" ColumnName="TenGoi" />
+                <ScalarProperty Name="SoNhanVien" ColumnName="SoNhanVien" />
+                <ScalarProperty Name="TongLuong" ColumnName="TongLuong" />
+                <ScalarProperty Name="LuongTrungBinh" ColumnName="LuongTrungBinh" />
+                <ScalarProperty Name="TyLe" ColumnName="TyLe" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_LayBangLuongTheoThang" FunctionName="QLNSModel.Store.sp_LayBangLuongTheoThang">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QLNSModel.sp_LayBangLuongTheoThang_Result">
+                <ScalarProperty Name="MaBL" ColumnName="MaBL" />
+                <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+                <ScalarProperty Name="SoNgayLam" ColumnName="SoNgayLam" />
+                <ScalarProperty Name="CoPhep" ColumnName="CoPhep" />
+                <ScalarProperty Name="KhongPhep" ColumnName="KhongPhep" />
+                <ScalarProperty Name="TongPhuCap" ColumnName="TongPhuCap" />
+                <ScalarProperty Name="TongTru" ColumnName="TongTru" />
+                <ScalarProperty Name="TongLuong" ColumnName="TongLuong" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetListNhanVien" FunctionName="QLNSModel.Store.sp_GetListNhanVien">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QLNSModel.sp_GetListNhanVien_Result">
+                <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="Sdt" ColumnName="Sdt" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="TenCV" ColumnName="TenCV" />
+                <ScalarProperty Name="TenPB" ColumnName="TenPB" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_LayDanhSachDon" FunctionName="QLNSModel.Store.sp_LayDanhSachDon">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QLNSModel.sp_LayDanhSachDon_Result">
+                <ScalarProperty Name="MaDon" ColumnName="MaDon" />
+                <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+                <ScalarProperty Name="TuNgay" ColumnName="TuNgay" />
+                <ScalarProperty Name="DenNgay" ColumnName="DenNgay" />
+                <ScalarProperty Name="LyDo" ColumnName="LyDo" />
+                <ScalarProperty Name="TrangThaiHienThi" ColumnName="TrangThaiHienThi" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetDanhSachHopDong" FunctionName="QLNSModel.Store.sp_GetDanhSachHopDong">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QLNSModel.sp_GetDanhSachHopDong_Result">
+                <ScalarProperty Name="MaHD" ColumnName="MaHD" />
+                <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+                <ScalarProperty Name="NgayBD" ColumnName="NgayBD" />
+                <ScalarProperty Name="NgayKT" ColumnName="NgayKT" />
+                <ScalarProperty Name="NgayKy" ColumnName="NgayKy" />
+                <ScalarProperty Name="MucLuong" ColumnName="MucLuong" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetListNhanPhuCap" FunctionName="QLNSModel.Store.sp_GetListNhanPhuCap">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QLNSModel.sp_GetListNhanPhuCap_Result">
+                <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+                <ScalarProperty Name="MaPC" ColumnName="MaPC" />
+                <ScalarProperty Name="TenPC" ColumnName="TenPC" />
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetListPhuCap" FunctionName="QLNSModel.Store.sp_GetListPhuCap">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QLNSModel.sp_GetListPhuCap_Result">
+                <ScalarProperty Name="MaPC" ColumnName="MaPC" />
+                <ScalarProperty Name="TenPC" ColumnName="TenPC" />
+                <ScalarProperty Name="SoTien" ColumnName="SoTien" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetListPhongBan" FunctionName="QLNSModel.Store.sp_GetListPhongBan">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QLNSModel.sp_GetListPhongBan_Result">
+                <ScalarProperty Name="MaPB" ColumnName="MaPB" />
+                <ScalarProperty Name="TenPB" ColumnName="TenPB" />
+                <ScalarProperty Name="DiaDiem" ColumnName="DiaDiem" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetListChucVu" FunctionName="QLNSModel.Store.sp_GetListChucVu">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QLNSModel.sp_GetListChucVu_Result">
+                <ScalarProperty Name="MaCV" ColumnName="MaCV" />
+                <ScalarProperty Name="TenCV" ColumnName="TenCV" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_ThemChucVu" FunctionName="QLNSModel.Store.sp_ThemChucVu" />
+          <FunctionImportMapping FunctionImportName="sp_SuaChucVu" FunctionName="QLNSModel.Store.sp_SuaChucVu" />
+          <FunctionImportMapping FunctionImportName="sp_XoaChucVu" FunctionName="QLNSModel.Store.sp_XoaChucVu" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

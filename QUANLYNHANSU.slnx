@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="BusinessLayer/BusinessLayer.csproj" Id="54c298d5-a11b-4aeb-8128-b9efdb3ca05b" />
+  <Project Path="DataLayer/DataLayer.csproj" Id="5d95a679-d432-4345-85e2-2f6e9b9d10b7" />
+  <Project Path="MainForm/QLNS.csproj" Id="1fa255d3-6d6e-4d0a-9ad7-f55491988d55" />
+</Solution>
