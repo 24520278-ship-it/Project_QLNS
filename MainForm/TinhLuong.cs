@@ -168,7 +168,6 @@ namespace MainForm
         }
         private void XuatBaoCaoPDF(string filePath, int thang, int nam)
         {
-            // Khởi tạo Document 
             Document doc = new Document(PageSize.A4.Rotate(), 20f, 20f, 30f, 30f);
             PdfWriter.GetInstance(doc, new FileStream(filePath, FileMode.Create));
             doc.Open();
@@ -177,7 +176,6 @@ namespace MainForm
             string fontPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Fonts), "arial.ttf");
             BaseFont bf = BaseFont.CreateFont(fontPath, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
 
-            // Khai báo đầy đủ trước để không bị nhầm với Font của C#
             iTextSharp.text.Font fontTitle = new iTextSharp.text.Font(bf, 16, iTextSharp.text.Font.BOLD, BaseColor.RED);
             iTextSharp.text.Font fontHeader = new iTextSharp.text.Font(bf, 11, iTextSharp.text.Font.BOLD);
             iTextSharp.text.Font fontNormal = new iTextSharp.text.Font(bf, 10, iTextSharp.text.Font.NORMAL);

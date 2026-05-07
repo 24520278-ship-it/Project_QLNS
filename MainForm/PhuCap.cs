@@ -70,7 +70,6 @@ namespace MainForm
                 return;
             }
 
-            // 3. Gọi BUS để thêm
             try
             {
                 if (pcBUS.ThemPhuCap(tenPC, soTien))
@@ -92,19 +91,15 @@ namespace MainForm
         private void btn_Sua_Click(object sender, EventArgs e)
         {
             string maPC = GridViewPC.CurrentRow.Cells["MaPC"].Value.ToString();
-
-            // 3. Lấy dữ liệu mới từ TextBox
             string tenMoi = txb_TenPC.Text.Trim();
             string chuoiSoTien = txb_ST.Text.Trim();
 
-            // Validate rỗng
             if (string.IsNullOrEmpty(tenMoi) || string.IsNullOrEmpty(chuoiSoTien))
             {
                 MessageBox.Show("Vui lòng nhập đầy đủ Tên phụ cấp và Số tiền!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // Validate kiểu số
             decimal soTienMoi;
             if (!decimal.TryParse(chuoiSoTien, out soTienMoi))
             {
@@ -118,18 +113,13 @@ namespace MainForm
                 return;
             }
 
-            // 4. Gọi BUS để thực hiện sửa
             try
             {
                 if (pcBUS.SuaPhuCap(maPC, tenMoi, soTienMoi))
                 {
                     MessageBox.Show("Cập nhật thông tin phụ cấp thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    // Làm sạch các ô nhập liệu
                     txb_TenPC.Text = "";
                     txb_ST.Text = "";
-
-                    // Load lại danh sách để hiển thị dữ liệu mới
                     LoadData();
                 }
             }
@@ -143,30 +133,22 @@ namespace MainForm
         {
             string maPC = GridViewPC.CurrentRow.Cells["MaPC"].Value.ToString();
             string tenPC = GridViewPC.CurrentRow.Cells["TenPC"].Value.ToString();
-
-            // 3. Hiển thị hộp thoại cảnh báo rủi ro mất dữ liệu liên quan
             DialogResult dialogResult = MessageBox.Show(
                 $"Bạn có chắc chắn muốn xóa phụ cấp '{tenPC}' không?\n\n" +
                 $"LƯU Ý: Thao tác này sẽ đồng thời xóa luôn tất cả các dữ liệu cấp phát phụ cấp này cho các nhân viên (nếu có)!",
                 "Cảnh báo xóa dữ liệu",
                 MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning); // Dùng icon Warning màu vàng thay vì Question
+                MessageBoxIcon.Warning); 
 
-            // 4. Nếu người dùng chọn Yes thì tiến hành xóa
             if (dialogResult == DialogResult.Yes)
             {
                 try
                 {
-                    // Gọi BUS để thực hiện xóa
                     if (pcBUS.XoaPhuCap(maPC))
                     {
                         MessageBox.Show("Đã xóa phụ cấp thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        // Làm sạch các ô nhập liệu
                         txb_TenPC.Text = "";
                         txb_ST.Text = "";
-
-                        // Tải lại dữ liệu lên lưới
                         LoadData();
                     }
                 }

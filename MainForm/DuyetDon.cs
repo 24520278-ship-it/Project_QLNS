@@ -22,7 +22,7 @@ namespace MainForm
             GridView_DuyetDon.Columns.Clear();
             GridView_DuyetDon.AutoGenerateColumns = false;
 
-            // --- 1. TẠO CÁC CỘT DỮ LIỆU ---
+            // Tạo các cột dữ liệu
 
             DataGridViewTextBoxColumn colMaDon = new DataGridViewTextBoxColumn();
             colMaDon.Name = "colMaDon";
@@ -90,8 +90,6 @@ namespace MainForm
             LoaiDon.Items.Add("Từ chối");   // Index = 2
 
             SetupGridView();
-
-            // CHỈ CẦN DÒNG NÀY LÀ ĐỦ: Nó sẽ kích hoạt sự kiện SelectedIndexChanged -> tự gọi LoadData() với index = 0
             LoaiDon.SelectedIndex = 0;
         }
 
@@ -99,12 +97,10 @@ namespace MainForm
         {
             int filterStatus = LoaiDon.SelectedIndex;
 
-            // CHỐT CHẶN: Nếu ComboBox chưa chọn gì (-1) thì thoát luôn, không làm gì cả
             if (filterStatus < 0) return;
 
             GridView_DuyetDon.DataSource = ddBUS.LayDanhSachDon(filterStatus);
 
-            // Ẩn hiện cột nút bấm (Phải kiểm tra xem cột đã tồn tại chưa để chống lỗi văng app)
             bool isPending = (filterStatus == 0);
             if (GridView_DuyetDon.Columns.Contains("colDuyet"))
                 GridView_DuyetDon.Columns["colDuyet"].Visible = isPending;
@@ -120,12 +116,9 @@ namespace MainForm
         private void GridView_DuyetDon_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
-
-            // 1. Lấy MaDon từ cột tương ứng (Phải đảm bảo cột MaDon đã được Setup DataPropertyName)
             string maDon = GridView_DuyetDon.Rows[e.RowIndex].Cells["colMaDon"].Value.ToString();
             string tenNV = GridView_DuyetDon.Rows[e.RowIndex].Cells["colHoTen"].Value.ToString();
 
-            // 2. Xử lý nút Duyệt
             if (GridView_DuyetDon.Columns[e.ColumnIndex].Name == "colDuyet")
             {
                 if (MessageBox.Show($"Xác nhận DUYỆT đơn của {tenNV}?", "Xác nhận", MessageBoxButtons.YesNo) == DialogResult.Yes)
@@ -141,7 +134,7 @@ namespace MainForm
             {
                 if (MessageBox.Show($"Từ chối đơn của {tenNV}?", "Xác nhận", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    if (ddBUS.CapNhatTrangThai(maDon, 2)) // 2: Từ chối
+                    if (ddBUS.CapNhatTrangThai(maDon, 2)) 
                     {
                         MessageBox.Show("Đã từ chối đơn.");
                         LoadData();

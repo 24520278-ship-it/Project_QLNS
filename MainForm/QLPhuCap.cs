@@ -49,8 +49,6 @@ namespace MainForm
                 txb_HoTen.Text = row.Cells["HoTen"].Value?.ToString();
                 txb_TenPC.Text = row.Cells["TenPC"].Value?.ToString();
                 txb_ND.Text = row.Cells["NoiDung"].Value?.ToString();
-
-                // Lưu ngầm Mã Phụ Cấp lại để xài cho nút Xóa
                 maPCDangChon = row.Cells["MaPC"].Value?.ToString();
             }
         }
@@ -111,7 +109,7 @@ namespace MainForm
                         MessageBox.Show("Đã xóa thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         LoadData();
                         txb_MaNV.Text = ""; txb_HoTen.Text = ""; txb_TenPC.Text = ""; txb_ND.Text = "";
-                        maPCDangChon = ""; // Reset biến
+                        maPCDangChon = ""; 
                     }
                 }
                 catch (Exception ex)

@@ -277,7 +277,6 @@ namespace MainForm
                 }
                 catch (Exception ex)
                 {
-                    // Nếu lỡ bấm hủy cái hợp đồng đã hủy rồi, lỗi từ Store Procedure sẽ bay lên đây
                     MessageBox.Show(ex.Message, "Lỗi khi hủy", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }

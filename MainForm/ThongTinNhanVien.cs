@@ -43,7 +43,6 @@ namespace MainForm
             }
             catch (Exception ex)
             {
-                // Nếu SQL Server chặn quyền SELECT trên các bảng liên quan, lỗi sẽ hiện ở đây
                 MessageBox.Show("Lỗi tải thông tin: " + ex.Message, "Thông báo hệ thống", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
