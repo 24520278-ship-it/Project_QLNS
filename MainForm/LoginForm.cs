@@ -72,7 +72,7 @@ namespace MainForm
                             }
                         }
                     }
-                    UserSession.MaNV = taiKhoan;
+                    UserSession.TaiKhoan = taiKhoan;
                     UserSession.EFConnectionString = $"metadata=res://*/Model1.csdl|res://*/Model1.ssdl|res://*/Model1.msl;provider=System.Data.SqlClient;provider connection string=\"{adoConnStr}MultipleActiveResultSets=True;App=EntityFramework\"";
 
                     string tenQuyen = "";
@@ -81,7 +81,7 @@ namespace MainForm
                     else if (UserSession.Role == "Role_KeToan") tenQuyen = "Kế Toán";
                     else tenQuyen = "Nhân Viên";
 
-                    MessageBox.Show($"Đăng nhập thành công!\nXin chào: {UserSession.MaNV}\nVai trò: {tenQuyen}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show($"Đăng nhập thành công!\nXin chào: {UserSession.TaiKhoan}\nVai trò: {tenQuyen}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     MainForm frm = new MainForm();
                     frm.Show();
                     this.Hide();

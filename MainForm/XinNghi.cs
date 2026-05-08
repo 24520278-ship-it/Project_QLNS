@@ -21,7 +21,7 @@ namespace MainForm
         }
         private void XinNghi_Load(object sender, EventArgs e)
         {
-            txb_MaNV.Text = UserSession.MaNV;
+            txb_MaNV.Text = UserSession.TaiKhoan;
             LoadDanhSachDon();
         }
         private void LoadDanhSachDon()

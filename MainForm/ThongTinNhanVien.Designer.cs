@@ -64,7 +64,7 @@
             this.txb_HoTen.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txb_HoTen.Location = new System.Drawing.Point(180, 157);
             this.txb_HoTen.Name = "txb_HoTen";
-            this.txb_HoTen.Size = new System.Drawing.Size(187, 27);
+            this.txb_HoTen.Size = new System.Drawing.Size(217, 27);
             this.txb_HoTen.TabIndex = 8;
             // 
             // label2
@@ -94,7 +94,7 @@
             this.txb_NgaySinh.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txb_NgaySinh.Location = new System.Drawing.Point(180, 225);
             this.txb_NgaySinh.Name = "txb_NgaySinh";
-            this.txb_NgaySinh.Size = new System.Drawing.Size(187, 27);
+            this.txb_NgaySinh.Size = new System.Drawing.Size(217, 27);
             this.txb_NgaySinh.TabIndex = 10;
             // 
             // label4
@@ -113,7 +113,7 @@
             this.txb_GioiTinh.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txb_GioiTinh.Location = new System.Drawing.Point(180, 302);
             this.txb_GioiTinh.Name = "txb_GioiTinh";
-            this.txb_GioiTinh.Size = new System.Drawing.Size(187, 27);
+            this.txb_GioiTinh.Size = new System.Drawing.Size(217, 27);
             this.txb_GioiTinh.TabIndex = 12;
             // 
             // label5
@@ -140,7 +140,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.Black;
-            this.label6.Location = new System.Drawing.Point(665, 155);
+            this.label6.Location = new System.Drawing.Point(696, 155);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(121, 23);
             this.label6.TabIndex = 17;
@@ -149,9 +149,9 @@
             // txb_SDT
             // 
             this.txb_SDT.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txb_SDT.Location = new System.Drawing.Point(796, 155);
+            this.txb_SDT.Location = new System.Drawing.Point(827, 155);
             this.txb_SDT.Name = "txb_SDT";
-            this.txb_SDT.Size = new System.Drawing.Size(187, 27);
+            this.txb_SDT.Size = new System.Drawing.Size(229, 27);
             this.txb_SDT.TabIndex = 16;
             // 
             // label7
@@ -159,7 +159,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.Black;
-            this.label7.Location = new System.Drawing.Point(665, 225);
+            this.label7.Location = new System.Drawing.Point(696, 225);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(59, 23);
             this.label7.TabIndex = 19;
@@ -168,9 +168,9 @@
             // txb_Email
             // 
             this.txb_Email.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txb_Email.Location = new System.Drawing.Point(796, 225);
+            this.txb_Email.Location = new System.Drawing.Point(827, 225);
             this.txb_Email.Name = "txb_Email";
-            this.txb_Email.Size = new System.Drawing.Size(187, 27);
+            this.txb_Email.Size = new System.Drawing.Size(229, 27);
             this.txb_Email.TabIndex = 18;
             // 
             // label8
@@ -178,7 +178,7 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.Black;
-            this.label8.Location = new System.Drawing.Point(665, 302);
+            this.label8.Location = new System.Drawing.Point(696, 302);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(79, 23);
             this.label8.TabIndex = 21;
@@ -187,10 +187,10 @@
             // txb_ChucVu
             // 
             this.txb_ChucVu.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txb_ChucVu.Location = new System.Drawing.Point(796, 302);
+            this.txb_ChucVu.Location = new System.Drawing.Point(827, 302);
             this.txb_ChucVu.Name = "txb_ChucVu";
             this.txb_ChucVu.ReadOnly = true;
-            this.txb_ChucVu.Size = new System.Drawing.Size(187, 27);
+            this.txb_ChucVu.Size = new System.Drawing.Size(229, 27);
             this.txb_ChucVu.TabIndex = 20;
             // 
             // label9
@@ -198,7 +198,7 @@
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.Black;
-            this.label9.Location = new System.Drawing.Point(665, 374);
+            this.label9.Location = new System.Drawing.Point(696, 374);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(101, 23);
             this.label9.TabIndex = 23;
@@ -207,17 +207,17 @@
             // txb_PhongBan
             // 
             this.txb_PhongBan.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txb_PhongBan.Location = new System.Drawing.Point(796, 374);
+            this.txb_PhongBan.Location = new System.Drawing.Point(827, 374);
             this.txb_PhongBan.Name = "txb_PhongBan";
             this.txb_PhongBan.ReadOnly = true;
-            this.txb_PhongBan.Size = new System.Drawing.Size(187, 27);
+            this.txb_PhongBan.Size = new System.Drawing.Size(229, 27);
             this.txb_PhongBan.TabIndex = 22;
             // 
             // btn_Luu
             // 
             this.btn_Luu.AutoSize = true;
             this.btn_Luu.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Luu.Location = new System.Drawing.Point(886, 463);
+            this.btn_Luu.Location = new System.Drawing.Point(955, 472);
             this.btn_Luu.Name = "btn_Luu";
             this.btn_Luu.Size = new System.Drawing.Size(101, 35);
             this.btn_Luu.TabIndex = 24;
